@@ -1,7 +1,7 @@
 const express= require('express');
 const mongoose= require('mongoose');
-const questionrouter= require("./routes/questions");
-const optionrouter = require("./routes/option")
+// const questionrouter= require("./routes/questions");
+const optionrouter = require("./routes/options");
 
 
 const app=express();
@@ -22,8 +22,8 @@ try{
     console.log("Error: "+error);
 }
 
-app.use('/questions',questionrouter)
-app.use('/options',optionrouter)
+// app.use('/questions',questionrouter);
+app.use('/options',optionrouter);
 
 
 

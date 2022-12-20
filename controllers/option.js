@@ -1,7 +1,9 @@
 const express= require('express');
 const mongoose= require('mongoose');
 
-const Option= require('../models/option');
+// const Option= require('../models/option');
+const Student= require('../models/option');
+
 
 const router= express.Router();
 
@@ -29,14 +31,16 @@ const getspecStudent = async (req,res) => {
 
 const createoption =  async (req, res) => {
     console.log(req.body.title);
-    const newstudent = new Option({
+    const newstudent = new Student({
         // name:req.body.name,
         // roll:req.body.roll,
         // registration:req.body.registration,
         // subjects:req.body.subjects,
         // created_on:req.body.created_on
-        title:req.body.title,
-        option:req.body.option,
+        // title:req.body.title,
+        // option:req.body.option,
+        id:req.body.id,
+        text:req.body.text,
 
 
     })
