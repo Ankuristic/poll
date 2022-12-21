@@ -2,7 +2,7 @@ const express= require('express');
 const mongoose= require('mongoose');
 
 // const Option= require('../models/option');
-const Student= require('../models/option');
+const Option= require('../models/option');
 
 
 const router= express.Router();
@@ -31,7 +31,7 @@ const getspecStudent = async (req,res) => {
 
 const createoption =  async (req, res) => {
     console.log(req.body.title);
-    const newstudent = new Student({
+    const newoption = new Option({
         // name:req.body.name,
         // roll:req.body.roll,
         // registration:req.body.registration,
@@ -45,10 +45,10 @@ const createoption =  async (req, res) => {
 
     })
     try {
-     const ankur=   await newstudent.save();
+     const ankur=   await newoption.save();
      console.log("ankur",ankur);
 
-        res.status(201).json(newstudent);
+        res.status(201).json(newoption);
 
     } catch(error) {
         res.status(400).json({ message : error.message});
@@ -77,12 +77,14 @@ const updatestudent = async (req, res) => {
     
 }
 
-const deletestudent = async (req, res) => {
-    const roll= req.params.roll;
+const deleteoption = async (req, res) => {
+    const id= req.params.id;
+    console.log("id",id);
 
     try {
-        await Student.findOneAndRemove({roll: roll});
-        res.status(203).json({roll:roll});
+      const ankur =   await Option.findOneAndRemove({id: id});
+      console.log("ankur",ankur);
+        res.status(203).json({message:"deleted successfully",id:id});
 
     }catch(error) {
         res.status(402).json({message: error.message});
@@ -93,4 +95,4 @@ module.exports.getStudents= getStudents;
 module.exports.createoption= createoption;
 module.exports.getspecStudent= getspecStudent;
 module.exports.updatestudent= updatestudent;
-module.exports.deletestudent= deletestudent;
+module.exports.deleteoption= deleteoption;

@@ -9,6 +9,6 @@ const router = express.Router();
 // router.get('/:roll', student_Act.getspecStudent);
 router.post('/create', options.createoption);
 // router.patch('/:roll', student_Act.updatestudent);
-// router.delete('/:roll', student_Act.deletestudent);
+router.get('/:id/delete', options.deleteoption);
 
 module.exports=router;

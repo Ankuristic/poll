@@ -3,7 +3,7 @@ const mongoose =require('mongoose');
 const optionSchema = mongoose.Schema({
     
         id: {
-          type: Number,
+          type: String,
         },
         // question: {
         //   type: mongoose.Schema.Types.ObjectId,
