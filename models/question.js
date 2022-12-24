@@ -1,5 +1,5 @@
 const mongoose =require('mongoose');
-
+const Option = require("../models/option")
 const questionSchema = mongoose.Schema({
     // name: {
     //     type: String,
@@ -27,15 +27,18 @@ const questionSchema = mongoose.Schema({
         type: String,
     },
 
-     option:{
-        type:String,
+     option:[
+        {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Option",
 
-     },
+     }
+    ]
 
-    //  vote:{
-    //     type:boolean
+   //   vote:{
+   //      type:boolean
 
-    //  }
+   //   }
 
 })
 

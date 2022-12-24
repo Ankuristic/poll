@@ -7,7 +7,7 @@ const optionrouter = require("./routes/options");
 const app=express();
 
 const port=9000;
-const url= "mongodb://localhost:27017/polling-api";
+const url= "mongodb+srv://Ankuristic12:Adya1998@cluster0.0lufvph.mongodb.net/?retryWrites=true&w=majority";
 console.log("url",url);
 
 mongoose.connect(url,{useNewUrlParser: true});
