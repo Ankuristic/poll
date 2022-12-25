@@ -40,7 +40,7 @@ const deleteQuestion = async function(req, res){
     try{
 
         let id = req.params.id;
-        let question = await Question.findById(id).populate({
+        let question = await Questions.findById(id).populate({
             path : 'option',
             select : 'votes',
         });
@@ -61,7 +61,7 @@ const deleteQuestion = async function(req, res){
 
            
             await Option.deleteMany({ question:id });
-            await Question.findByIdAndDelete(id);
+            await Questions.findByIdAndDelete(id);
 
             return res.status(200).json({
                 message : "Question deleted successfully",
@@ -72,7 +72,7 @@ const deleteQuestion = async function(req, res){
         }
 
     }catch(err){
-        console.log("******* Error in deleting question ********* ",err);
+        console.log(" Error in deleting question ",err);
         return res.status(500).json({
             message : "Internal server error in deleting question",
         });
@@ -93,7 +93,7 @@ const viewQuestion = async function(req, res){
 
     }catch(err){
 
-        console.log("******* Error in viewing question ********* ",err);
+        console.log("Error in viewing question  ",err);
         return res.status(500).json({
             data : { message : "Internal Server Error in viewing question" }
         });
