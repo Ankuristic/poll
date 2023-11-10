@@ -103,6 +103,11 @@ const viewQuestion = async function(req, res){
 }
 
 
+exports.getAddForm=(req,res)=>{
+    return  res.render('index')
+ }
+
+
 
   module.exports ={
     createQuestion,

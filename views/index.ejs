@@ -8,17 +8,13 @@
 </head>
 <body>
   <div class="container">
-    <h1 class="mt-4">Create a poll and get results for free!</h1>
+    <h1 class="mt-4">Create a poll and get results!</h1>
     <small class="text text-muted">
       There can only be four option for the poll.
     </small>
-    <% if(error == true) { %>
-      <div class="alert alert-danger mt-4" style="margin-bottom: -10px;" role="alert">
-       <%= message %>
-      </div>
-    <% } %> 
+  
 
-    <!-- <form action="/" method="POST">
+    <form action="/" method="POST">
       <div class="form-group">
         <br>
         <br>
@@ -32,7 +28,7 @@
         <br>
         <button type="submit" class="btn btn-info">Make a poll!</button>
       </div>
-    </form> -->
+    </form>
   </div>
 
   <div id="chat-container">
@@ -48,7 +44,7 @@
 <script>
     // socket code in js.
 
-    const socket = io.connect('http://localhost:3000');
+    const socket = io.connect('http://localhost:9000/view');
     const username = prompt('Enter your name');
     // emit the username to the server
     socket.emit("join", username);

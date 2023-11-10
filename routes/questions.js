@@ -18,4 +18,8 @@ router.get("/:id/delete", questions.deleteQuestion);
 // adding a route for getting the details of a particular question
 router.get("/:id", questions.viewQuestion);
 
+// get form data
+
+// router.get('/form',questions.getAddForm)
+
 module.exports=router;
