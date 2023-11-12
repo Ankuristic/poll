@@ -8,6 +8,7 @@ const http = require('http')
 // const {Server} = require("socket.io")
 const {chatModel} =require ("./models/chat")
 const path = require('path')
+const ejsLayouts = require ('express-ejs-layouts');
 const socketIO = require('socket.io');
 const dotenv = require('dotenv')
 dotenv.config();
@@ -41,6 +42,7 @@ app.set('view engine', 'ejs');
 // const anku=app.set("views",path.join(path.resolve(),'views'))
 // app.use('/static/', express.static(path.join(__dirname + '/static')));
 // app.use('public', express.static(path.join(__dirname, 'public')));
+app.use(ejsLayouts);
 app.use(express.json());
 try{
     con.on('open',() => {
