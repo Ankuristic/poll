@@ -35,16 +35,17 @@
     <div id="message-list">
         <!-- list will contain messages -->
     </div>
+    <h1> chatting ----</h1>
     <input type="text" id="message-input">
     <button id="send-message">Send</button>
 </div>
 
-<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+<script src="http://localhost:9000/socket.io/socket.io.js"></script>
 
 <script>
     // socket code in js.
 
-    const socket = io.connect('http://localhost:9000/view');
+    const socket = io.connect('http://localhost:9000/');
     const username = prompt('Enter your name');
     // emit the username to the server
     socket.emit("join", username);

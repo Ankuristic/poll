@@ -5,27 +5,31 @@ const optionrouter = require("./routes/options");
 // const config =  require("./config/mongoose")
 const cors = require('cors');
 const http = require('http')
-const {Server} = require("socket.io")
+// const {Server} = require("socket.io")
 const {chatModel} =require ("./models/chat")
 const path = require('path')
-
-
-
+const socketIO = require('socket.io');
+const dotenv = require('dotenv')
+dotenv.config();
 
 const app=express();
 
+const port = process.env.PORT || '9000';
+
+
 // 1. Creating server using http.
 const server = http.createServer(app);
+const io = socketIO(server);
+
 
 // 2. Create socket server.
-const io = new Server(server, {
-    cors: {
-        origin: '*',
-        methods: ["GET", "POST"]
-    }
-});
+// const io = new Server(server, {
+//     cors: {
+//         origin: '*',
+//         methods: ["GET", "POST"]
+//     }
+// });
 
-const port=9000;
 const url= "mongodb+srv://Ankuristic12:Adya1998@cluster0.0lufvph.mongodb.net/?retryWrites=true&w=majority";
 console.log("url",url);
 mongoose.connect(url,{useNewUrlParser: true});
@@ -49,48 +53,26 @@ try{
 
 
 // 3. Use socket events.
-
 io.on('connection', (socket) => {
     console.log("Connection is established");
 
-    socket.on("join", (data) => {
-        socket.username = data;
-        // send old messages to the clients.
-        chatModel.find().sort({ timestamp: 1 }).limit(50)
-            .then(messages => {
-                socket.emit('load_messages', messages);
-            }).catch(err => {
-                console.log(err);
-            })
-    });
+      // Handle chat events (e.g., messages)
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg); // Broadcast the message to all connected clients
+  });
 
-    socket.on('new_message', (message) => {
-        let userMessage = {
-            username: socket.username,
-            message: message
-        }
-
-        const newChat = new chatModel({
-            username: socket.username,
-            message: message,
-            timestamp: new Date()
-        });
-        newChat.save();
-
-        // broadcast this message to all the clients.
-        socket.broadcast.emit('broadcast_message', userMessage);
-    })
-
-    socket.on('disconnect', () => {
-        console.log("Connection is disconnected");
-    })
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+  });
 });
+
+
 app.use('/questions',questionrouter);
 app.use('/options',optionrouter);
 
 // template engine route
 
-app.get("/view",(req,res)=>{
+app.get("/",(req,res)=>{
     res.render("index")
 })
 
@@ -111,6 +93,6 @@ app.get("/notFound",(req,res)=>{
 
 
 
-app.listen(port, () =>{
+server.listen(port, () =>{
     console.log('Server started'+  port);
 })
